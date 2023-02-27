@@ -1,8 +1,8 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@asimov-ts/core': ^0.0.1
-  '@asimov-ts/web': ^0.0.1
+  '@asimov-ts/core': ^0.0.3
+  '@asimov-ts/web': ^0.0.2
   fp-ts: ^2.13.1
   keycode-js: ^3.1.0
   nanoid: ^3.3.4
@@ -11,8 +11,8 @@ specifiers:
   vite-plugin-solid: ^2.5.0
 
 dependencies:
-  '@asimov-ts/core': 0.0.1_fp-ts@2.13.1+nanoid@3.3.4
-  '@asimov-ts/web': 0.0.1
+  '@asimov-ts/core': 0.0.3_fp-ts@2.13.1+nanoid@3.3.4
+  '@asimov-ts/web': 0.0.2
   fp-ts: 2.13.1
   keycode-js: 3.1.0
   nanoid: 3.3.4
@@ -32,8 +32,8 @@ packages:
       '@jridgewell/trace-mapping': 0.3.17
     dev: true
 
-  /@asimov-ts/core/0.0.1_fp-ts@2.13.1+nanoid@3.3.4:
-    resolution: {integrity: sha512-G0SWtjpdvdQySGCDtIRIjZ5txjJARpqroiqX2eg78ldmOuJ43TRolDvdBBUglusU2p3c/hM4lfXHxn3dO7tK6w==}
+  /@asimov-ts/core/0.0.3_fp-ts@2.13.1+nanoid@3.3.4:
+    resolution: {integrity: sha512-tkbEUpgWUWfuz8GamPtstWvcAJhVCQv5qp1L+8bgAhyiyWg3viRd4Ydz69BzItNFmA0Vr24mnnvNOVLukBLIQg==}
     peerDependencies:
       fp-ts: 2.13.1
       nanoid: 3.3.4
@@ -42,8 +42,8 @@ packages:
       nanoid: 3.3.4
     dev: false
 
-  /@asimov-ts/web/0.0.1:
-    resolution: {integrity: sha512-/D/lGeqcPHpy15HTSz/ONwHkQF9duBdBwXWealQelEt3a21VZD2tnSiULtXFce+NeLf7kz28oIvxCetArpF32Q==}
+  /@asimov-ts/web/0.0.2:
+    resolution: {integrity: sha512-6Qrx6E+TUvylUOjqlM76UzeIZU0khrDqJ2P0/yMBc0jLVec6y4LqcSqNH2WX2IMOXVujiYGIrKphy12b4lpyPA==}
     dev: false
 
   /@babel/code-frame/7.18.6:
