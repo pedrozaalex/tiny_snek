@@ -4,10 +4,13 @@ import {
 	UIUpdaterSystem,
 } from '@asimov-ts/common'
 import { createGame } from '@asimov-ts/core'
-import { Food, Player, StateTracker } from './buildables'
-import { UserInterface } from './buildables/UserInterface.buildable'
-import { InputSystem, MovementSystem, RenderingSystem } from './systems'
-import { TrackPlayerSystem } from './systems/TrackPlayer.system'
+import { Food, Player, StateTracker, UserInterface } from './buildables'
+import {
+	InputSystem,
+	MovementSystem,
+	RenderingSystem,
+	TrackPlayerSystem,
+} from './systems'
 
 createGame()
 	.withBuildable(new Player())
