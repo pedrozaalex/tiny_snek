@@ -1,3 +1,3 @@
-import { Component } from "@asimov-ts/core";
+import { Component } from '@asimov-ts/core'
 
 export class PointsComponent extends Component<number> {}

@@ -1,9 +1,9 @@
-import { GameEvent } from "./systems";
+import { GameEvent } from './systems'
 
 export class PlayerAteFoodEvent {
-  type = GameEvent.OnPlayerAteFood;
+	type = GameEvent.OnPlayerAteFood
 }
 
 export class PlayerDiedEvent {
-  type = GameEvent.OnPlayerDied;
+	type = GameEvent.OnPlayerDied
 }
