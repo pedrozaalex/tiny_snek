@@ -1,4 +1,4 @@
-![recording](https://thumbs.gfycat.com/PossiblePointedBudgie-mobile.mp4)
+![recording](https://github.com/pedrozaalex/tiny_snek/blob/main/.github/tiny_snek_recording.mov?raw=true)
 
 ## Usage
 
