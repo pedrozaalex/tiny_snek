@@ -1,9 +1,13 @@
-import { GameEvent } from './systems'
+import { IEvent } from '@asimov-ts/common'
 
-export class PlayerAteFoodEvent {
-	type = GameEvent.OnPlayerAteFood
+export class PlayerAteFoodEvent implements IEvent {
+	type = 'OnPlayerAteFood'
 }
 
-export class PlayerDiedEvent {
-	type = GameEvent.OnPlayerDied
+export class PlayerDiedEvent implements IEvent {
+	type = 'OnPlayerDied'
+}
+
+export class OnGameRestartEvent implements IEvent {
+	type = 'OnGameRestart'
 }

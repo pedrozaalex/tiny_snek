@@ -1,14 +1,12 @@
-import { createGame } from '@asimov-ts/core'
-import { Food, Player, StateTracker } from './buildables'
-import { UserInterface } from './buildables/UserInterface.buildable'
 import {
 	CollisionSystem,
 	EventsSystem,
-	InputSystem,
-	MovementSystem,
-	RenderingSystem,
 	UIUpdaterSystem,
-} from './systems'
+} from '@asimov-ts/common'
+import { createGame } from '@asimov-ts/core'
+import { Food, Player, StateTracker } from './buildables'
+import { UserInterface } from './buildables/UserInterface.buildable'
+import { InputSystem, MovementSystem, RenderingSystem } from './systems'
 import { TrackPlayerSystem } from './systems/TrackPlayer.system'
 
 createGame()

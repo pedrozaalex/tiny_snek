@@ -1,23 +1,21 @@
-import { IEvent, EventQueue } from '@asimov-ts/common'
+import { EventQueue, UIBlockComponent } from '@asimov-ts/common'
 import { Entity, IBuildable } from '@asimov-ts/core'
 import { pipe } from 'fp-ts/lib/function'
 import { getOrElse, isSome } from 'fp-ts/lib/Option'
 import { Match, Switch } from 'solid-js'
 import {
 	GameStateComponent,
-	PointsComponent,
-	UIBlockComponent,
+	PointsComponent
 } from '../components'
 import { GameState } from '../constants'
+import { OnGameRestartEvent } from '../events'
 
 type UIProps = {
 	points: number
 	gameState: GameState
 }
 
-class OnGameRestartEvent implements IEvent {
-	type = 'OnGameRestart'
-}
+
 
 export class UserInterface extends Entity implements IBuildable {
 	private restartButtonHandler = () =>
