@@ -11,6 +11,13 @@ export function isMovementSystem(system: ISystem): system is MovementSystem {
 	return system.name === 'MovementSystem'
 }
 
+function getPoints(entity: Entity) {
+	return pipe(
+		entity.getComponentValue(PointsComponent),
+		getOrElse(() => 0)
+	)
+}
+
 export class MovementSystem implements ISystem {
 	name = 'MovementSystem'
 
@@ -29,22 +36,14 @@ export class MovementSystem implements ISystem {
 
 		if (!stateTracker) {
 			console.error('Expected to find a StateTracker entity in the universe but none was found.')
-
 			return
 		}
 
 		const state = stateTracker.getComponentValue(GameStateComponent)
 
-		if (isNone(state) || state?.value !== GameState.Running) return
+		if (isNone(state) || state.value !== GameState.Running) return
 
-		const playerPoints = entities
-			.map(e =>
-				pipe(
-					e.getComponentValue(PointsComponent),
-					getOrElse(() => 0)
-				)
-			)
-			.reduce((a, b) => a + b, 0)
+		const playerPoints = entities.map(getPoints).reduce((a, b) => a + b, 0)
 
 		const timeBetweenTicks = mapPointsToTimeBetweenTicks(playerPoints)
 
@@ -70,13 +69,7 @@ export class MovementSystem implements ISystem {
 			let newY = (transform.y + dy) % BOARD_HEIGHT
 			newY = newY < 0 ? newY + BOARD_HEIGHT : newY
 
-			// entity.setComponent(new TransformComponent(newX, newY, transform.rotation, transform.scale))
-			entity.setComponent(TransformComponent, prev => ({
-				x: newX,
-				y: newY,
-				rotation: prev.rotation,
-				scale: prev.scale,
-			}))
+			entity.setComponent(new TransformComponent(newX, newY, transform.rotation, transform.scale))
 
 			if (entity instanceof Player) {
 				entity.onMove({ x: newX, y: newY })
