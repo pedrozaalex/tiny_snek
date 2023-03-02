@@ -1,19 +1,9 @@
-import {
-	TransformComponent,
-	AABBCollider,
-	EventQueue,
-	EventListener,
-} from '@asimov-ts/common'
+import { TransformComponent, AABBCollider, EventQueue, EventListener } from '@asimov-ts/common'
 import { Entity, IBuildable } from '@asimov-ts/core'
 import { pipe } from 'fp-ts/lib/function'
 import { getOrElse, toNullable } from 'fp-ts/lib/Option'
 import * as KeyCode from 'keycode-js'
-import {
-	HazardComponent,
-	InputListener,
-	SquareComponent,
-	VelocityComponent,
-} from '../components'
+import { HazardComponent, InputListener, SquareComponent, VelocityComponent } from '../components'
 import { NutritionComponent } from '../components/Nutrition.component'
 import {
 	PLAYER_COLOR,
@@ -83,10 +73,7 @@ export class Player extends Entity implements IBuildable {
 
 				onCollision: other => {
 					if (other.hasComponent(HazardComponent)) {
-						this.setComponent(EventQueue, queuedEvents => [
-							...queuedEvents,
-							new PlayerDiedEvent(),
-						])
+						this.setComponent(EventQueue, queuedEvents => [...queuedEvents, new PlayerDiedEvent()])
 					}
 
 					if (other.hasComponent(NutritionComponent)) {

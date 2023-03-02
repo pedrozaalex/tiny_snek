@@ -3,10 +3,7 @@ import { Entity, IBuildable } from '@asimov-ts/core'
 import { pipe } from 'fp-ts/lib/function'
 import { getOrElse, isSome } from 'fp-ts/lib/Option'
 import { Match, Switch } from 'solid-js'
-import {
-	GameStateComponent,
-	PointsComponent
-} from '../components'
+import { GameStateComponent, PointsComponent } from '../components'
 import { GameState } from '../constants'
 import { OnGameRestartEvent } from '../events'
 
@@ -15,14 +12,9 @@ type UIProps = {
 	gameState: GameState
 }
 
-
-
 export class UserInterface extends Entity implements IBuildable {
 	private restartButtonHandler = () =>
-		this.setComponent(EventQueue, queuedEvents => [
-			...queuedEvents,
-			new OnGameRestartEvent(),
-		])
+		this.setComponent(EventQueue, queuedEvents => [...queuedEvents, new OnGameRestartEvent()])
 
 	getInitialComponents() {
 		return [
@@ -32,10 +24,7 @@ export class UserInterface extends Entity implements IBuildable {
 					const points = entities
 						.filter(e => e.hasComponent(PointsComponent))
 						.map(e => e.getComponentValue(PointsComponent))
-						.reduce(
-							(acc, points) => (isSome(points) ? acc + points.value : acc),
-							0
-						)
+						.reduce((acc, points) => (isSome(points) ? acc + points.value : acc), 0)
 
 					const [gameState] = entities
 						.filter(e => e.hasComponent(GameStateComponent))

@@ -3,18 +3,8 @@ import { Entity, ISystem } from '@asimov-ts/core'
 import { pipe } from 'fp-ts/lib/function'
 import { getOrElse, isNone, toNullable } from 'fp-ts/lib/Option'
 import { Player, StateTracker } from '../buildables'
-import {
-	GameStateComponent,
-	PointsComponent,
-	VelocityComponent,
-} from '../components'
-import {
-	BOARD_HEIGHT,
-	BOARD_WIDTH,
-	GameState,
-	SQUARE_HEIGHT,
-	SQUARE_WIDTH,
-} from '../constants'
+import { GameStateComponent, PointsComponent, VelocityComponent } from '../components'
+import { BOARD_HEIGHT, BOARD_WIDTH, GameState, SQUARE_HEIGHT, SQUARE_WIDTH } from '../constants'
 import { mapPointsToTimeBetweenTicks } from '../utils'
 
 export function isMovementSystem(system: ISystem): system is MovementSystem {
@@ -26,8 +16,7 @@ export class MovementSystem implements ISystem {
 
 	filter(entity: Entity) {
 		return (
-			(entity.hasComponent(TransformComponent) &&
-				entity.hasComponent(VelocityComponent)) ||
+			(entity.hasComponent(TransformComponent) && entity.hasComponent(VelocityComponent)) ||
 			entity.hasComponent(PointsComponent) ||
 			entity instanceof StateTracker
 		)
@@ -39,9 +28,7 @@ export class MovementSystem implements ISystem {
 		const stateTracker = entities.find(e => e instanceof StateTracker)
 
 		if (!stateTracker) {
-			console.error(
-				'Expected to find a StateTracker entity in the universe but none was found.'
-			)
+			console.error('Expected to find a StateTracker entity in the universe but none was found.')
 
 			return
 		}
@@ -74,22 +61,22 @@ export class MovementSystem implements ISystem {
 			if (!transform || !velocity) return
 
 			const dx =
-				Math.abs(velocity.dx) > 0
-					? (SQUARE_WIDTH * velocity.dx) / Math.abs(velocity.dx)
-					: 0
+				Math.abs(velocity.dx) > 0 ? (SQUARE_WIDTH * velocity.dx) / Math.abs(velocity.dx) : 0
 			let newX = (transform.x + dx) % BOARD_WIDTH
 			newX = newX < 0 ? newX + BOARD_WIDTH : newX
 
 			const dy =
-				Math.abs(velocity.dy) > 0
-					? (SQUARE_HEIGHT * velocity.dy) / Math.abs(velocity.dy)
-					: 0
+				Math.abs(velocity.dy) > 0 ? (SQUARE_HEIGHT * velocity.dy) / Math.abs(velocity.dy) : 0
 			let newY = (transform.y + dy) % BOARD_HEIGHT
 			newY = newY < 0 ? newY + BOARD_HEIGHT : newY
 
-			entity.setComponent(
-				new TransformComponent(newX, newY, transform.rotation, transform.scale)
-			)
+			// entity.setComponent(new TransformComponent(newX, newY, transform.rotation, transform.scale))
+			entity.setComponent(TransformComponent, prev => ({
+				x: newX,
+				y: newY,
+				rotation: prev.rotation,
+				scale: prev.scale,
+			}))
 
 			if (entity instanceof Player) {
 				entity.onMove({ x: newX, y: newY })

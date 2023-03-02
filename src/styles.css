@@ -18,8 +18,7 @@ body {
 	position: absolute;
 	top: 0;
 	--total-board-size: calc(
-		var(--board-size) + var(--canvas-border-width) * 2 + var(--canvas-padding) *
-			2
+		var(--board-size) + var(--canvas-border-width) * 2 + var(--canvas-padding) * 2
 	);
 	width: var(--total-board-size);
 	height: calc(var(--total-board-size) + var(--header-height));

@@ -2,12 +2,7 @@ import { TransformComponent } from '@asimov-ts/common'
 import { Entity, ISystem } from '@asimov-ts/core'
 import { clearCanvas, drawCircle, drawRect } from '@asimov-ts/web'
 import { isNone, isSome } from 'fp-ts/lib/Option'
-import {
-	CircleComponent,
-	isDrawable,
-	RectangleComponent,
-	SquareComponent,
-} from '../components'
+import { CircleComponent, isDrawable, RectangleComponent, SquareComponent } from '../components'
 
 type Circle = {
 	type: 'circle'

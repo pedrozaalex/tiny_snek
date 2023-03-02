@@ -1,11 +1,7 @@
 import { EventListener } from '@asimov-ts/common'
 import { Component, Entity, IBuildable, IComponentValue } from '@asimov-ts/core'
 import * as KeyCode from 'keycode-js'
-import {
-	GameStateComponent,
-	InputListener,
-	PointsComponent,
-} from '../components'
+import { GameStateComponent, InputListener, PointsComponent } from '../components'
 import { GameState } from '../constants'
 
 export class StateTracker extends Entity implements IBuildable {
@@ -30,9 +26,7 @@ export class StateTracker extends Entity implements IBuildable {
 					this.setComponent(GameStateComponent, previousState => {
 						if (previousState === GameState.GameOver) return previousState
 
-						return previousState === GameState.Paused
-							? GameState.Running
-							: GameState.Paused
+						return previousState === GameState.Paused ? GameState.Running : GameState.Paused
 					})
 				},
 			}),

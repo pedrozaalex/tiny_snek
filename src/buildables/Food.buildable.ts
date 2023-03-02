@@ -38,13 +38,11 @@ function convertGridToGlobalPosition(pos: Pos2D) {
 }
 
 const boardSquaresAvailabilityMap = new Set<string>(
-	Array.from({ length: HORIZONTAL_SQUARE_COUNT * VERTICAL_SQUARE_COUNT }).map(
-		(_, index) => {
-			const x = index % HORIZONTAL_SQUARE_COUNT
-			const y = Math.floor(index / HORIZONTAL_SQUARE_COUNT)
-			return `${x},${y}`
-		}
-	)
+	Array.from({ length: HORIZONTAL_SQUARE_COUNT * VERTICAL_SQUARE_COUNT }).map((_, index) => {
+		const x = index % HORIZONTAL_SQUARE_COUNT
+		const y = Math.floor(index / HORIZONTAL_SQUARE_COUNT)
+		return `${x},${y}`
+	})
 )
 
 export class Food extends Entity implements IBuildable {
@@ -80,10 +78,7 @@ export class Food extends Entity implements IBuildable {
 						const newPos = this.getRandomPosition()
 						this.setComponent(new TransformComponent(newPos.x, newPos.y))
 
-						this.setComponent(EventQueue, queuedEvents => {
-							queuedEvents.push(new PlayerAteFoodEvent())
-							return queuedEvents
-						})
+						this.setComponent(EventQueue, prev => [...prev, new PlayerAteFoodEvent()])
 					}
 				},
 			}),
