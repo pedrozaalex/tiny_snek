@@ -54,6 +54,7 @@ body {
 .game-state button {
 	font-size: 1.1rem;
 	font-family: 'Space Mono', monospace;
+	border: none;
 	cursor: pointer;
 	background: black;
 	color: white;
