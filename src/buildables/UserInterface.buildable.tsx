@@ -63,8 +63,7 @@ export class UserInterface extends Entity implements IBuildable {
 						</div>
 
 						<div class='controls'>
-							<p>controls: &larr; &rarr; &uarr; &darr; to move</p>
-							<p>space to pause</p>
+							<p>controls: &larr; &rarr; &uarr; &darr; to move, space to pause</p>
 						</div>
 					</>
 				)
