@@ -38,30 +38,37 @@ export class UserInterface extends Entity implements IBuildable {
 
 					return {
 						points,
-						gameState,
+						gameState
 					}
 				},
 
 				render: (props: UIProps) => (
-					<div class="ui-root">
-						<div class="ui-header">
-							<p>score: {props.points.toString().padStart(4, '0')}</p>
+					<>
+						<div class='ui-root'>
+							<div class='ui-header'>
+								<p>score: {props.points.toString().padStart(4, '0')}</p>
+							</div>
+
+							<div class='game-state'>
+								<Switch fallback={null}>
+									<Match when={props.gameState === GameState.Paused}>
+										<span>Paused</span>
+									</Match>
+									<Match when={props.gameState === GameState.GameOver}>
+										<span>Game Over</span>
+										<button onClick={this.restartButtonHandler}>restart?</button>
+									</Match>
+								</Switch>
+							</div>
 						</div>
 
-						<div class="game-state">
-							<Switch fallback={null}>
-								<Match when={props.gameState === GameState.Paused}>
-									<span>Paused</span>
-								</Match>
-								<Match when={props.gameState === GameState.GameOver}>
-									<span>Game Over</span>
-									<button onClick={this.restartButtonHandler}>restart?</button>
-								</Match>
-							</Switch>
+						<div class='controls'>
+							<p>controls: &larr; &rarr; &uarr; &darr; to move</p>
+							<p>space to pause</p>
 						</div>
-					</div>
-				),
-			}),
+					</>
+				)
+			})
 		]
 	}
 }
