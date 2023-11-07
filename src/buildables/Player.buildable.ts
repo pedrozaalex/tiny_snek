@@ -1,17 +1,10 @@
-import { TransformComponent, AABBCollider, EventQueue, EventListener } from '@asimov-ts/common'
+import { AABBCollider, EventListener, EventQueue, TransformComponent } from '@asimov-ts/common'
 import { Entity, IBuildable } from '@asimov-ts/core'
 import { pipe } from 'fp-ts/lib/function'
 import { getOrElse, toNullable } from 'fp-ts/lib/Option'
 import * as KeyCode from 'keycode-js'
-import { HazardComponent, InputListener, SquareComponent, VelocityComponent } from '../components'
-import { NutritionComponent } from '../components/Nutrition.component'
-import {
-	PLAYER_COLOR,
-	PLAYER_SIZE,
-	PLAYER_VELOCITY,
-	SQUARE_HEIGHT,
-	SQUARE_WIDTH,
-} from '../constants'
+import { HazardComponent, InputListener, NutritionComponent, SquareComponent, VelocityComponent } from '../components'
+import { PLAYER_COLOR, PLAYER_SIZE, PLAYER_VELOCITY, SQUARE_HEIGHT, SQUARE_WIDTH } from '../constants'
 import { PlayerDiedEvent } from '../events'
 import { TailSegment } from './TailSegment.buildable'
 
@@ -32,17 +25,14 @@ function getDirectionFromVector(axes: { dx: number; dy: number }) {
 	}
 }
 
-const initialTransform = new TransformComponent(SQUARE_WIDTH, SQUARE_HEIGHT)
-
-const initialVelocity = new VelocityComponent(PLAYER_VELOCITY, 0)
-
 export class Player extends Entity implements IBuildable {
 	private _pastPositions: { x: number; y: number }[] = []
 	private _tailSegments: TailSegment[] = []
 	private _currentPosition: { x: number; y: number } = {
 		x: SQUARE_WIDTH,
-		y: SQUARE_HEIGHT,
+		y: SQUARE_HEIGHT
 	}
+
 	public onMove(newPos: { x: number; y: number }) {
 		this._pastPositions.push(this._currentPosition)
 		this._currentPosition = newPos
@@ -64,8 +54,8 @@ export class Player extends Entity implements IBuildable {
 
 	public getInitialComponents() {
 		return [
-			initialTransform,
-			initialVelocity,
+			new TransformComponent(SQUARE_WIDTH, SQUARE_HEIGHT),
+			new VelocityComponent(PLAYER_VELOCITY, 0),
 			new SquareComponent(PLAYER_SIZE, PLAYER_COLOR),
 			new AABBCollider({
 				width: PLAYER_SIZE,
@@ -89,7 +79,7 @@ export class Player extends Entity implements IBuildable {
 							this.addChild(newSegment)
 						}
 					}
-				},
+				}
 			}),
 			new InputListener({
 				[KeyCode.VALUE_UP]: () => {
@@ -114,7 +104,7 @@ export class Player extends Entity implements IBuildable {
 					const direction = this.getDirection()
 					if (direction === Direction.Left) return
 					this.setComponent(new VelocityComponent(PLAYER_VELOCITY, 0))
-				},
+				}
 			}),
 			new EventQueue(),
 			new EventListener({
@@ -123,10 +113,10 @@ export class Player extends Entity implements IBuildable {
 					this._tailSegments.forEach(segment => this.removeChild(segment))
 					this._tailSegments = []
 
-					this.setComponent(initialTransform)
-					this.setComponent(initialVelocity)
-				},
-			}),
+					this.setComponent(new TransformComponent(SQUARE_WIDTH, SQUARE_HEIGHT))
+					this.setComponent(new VelocityComponent(PLAYER_VELOCITY, 0))
+				}
+			})
 		]
 	}
 }

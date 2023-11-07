@@ -1,7 +1,7 @@
-import { CollisionSystem, EventsSystem, UIUpdaterSystem } from '@asimov-ts/common'
+import { CollisionSystem, EventsSystem } from '@asimov-ts/common'
 import { createGame } from '@asimov-ts/core'
 import { Food, Player, StateTracker, UserInterface } from './buildables'
-import { InputSystem, MovementSystem, RenderingSystem, TrackPlayerSystem } from './systems'
+import { InputSystem, MovementSystem, RenderingSystem, TrackPlayerSystem, UIUpdaterSystem } from './systems'
 
 createGame()
 	.withBuildable(new Player())

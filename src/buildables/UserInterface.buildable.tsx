@@ -1,4 +1,4 @@
-import { EventQueue, UIBlockComponent } from '@asimov-ts/common'
+import { EventQueue } from '@asimov-ts/common'
 import { Entity, IBuildable } from '@asimov-ts/core'
 import { pipe } from 'fp-ts/lib/function'
 import { getOrElse, isSome } from 'fp-ts/lib/Option'
@@ -6,6 +6,7 @@ import { Match, Switch } from 'solid-js'
 import { GameStateComponent, PointsComponent } from '../components'
 import { GameState } from '../constants'
 import { OnGameRestartEvent } from '../events'
+import { UIBlockComponent } from '../components'
 
 type UIProps = {
 	points: number
